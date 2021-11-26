@@ -1,0 +1,13 @@
+.footer{
+    background-color: rgb(29, 25, 25);
+    color: #fff;
+    padding: 12px;
+}
+li{
+        list-style: none; 
+        color: rgb(221, 209, 209);
+}
+.copyright{
+    padding: 12px;
+    background-color: rgb(39, 35, 35);
+}
