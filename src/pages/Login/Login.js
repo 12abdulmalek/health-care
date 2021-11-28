@@ -21,7 +21,7 @@ const Login = () => {
   }
      const handleRegistration = e => {
       //    (email,pass);
-        signInPersonalData(email,pass);
+        signInPersonalData(email,pass,location,history);
          e.preventDefault();
      }
      const googleHandleSignIn = () => {

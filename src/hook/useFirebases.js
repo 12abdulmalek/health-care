@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import intializationAuthentication from "../firebase/initialize.init";
-import {getAuth,signInWithPopup,GoogleAuthProvider,signOut,createUserWithEmailAndPassword,GithubAuthProvider,signInWithEmailAndPassword} from 'firebase/auth';
+import {getAuth,signInWithPopup,GoogleAuthProvider,signOut,createUserWithEmailAndPassword,onAuthStateChanged,GithubAuthProvider,signInWithEmailAndPassword} from 'firebase/auth';
 
 intializationAuthentication();
 const useFirebases = () => {
@@ -9,13 +9,21 @@ const useFirebases = () => {
     const [error,setError]=useState('');
     const auth = getAuth();
     const googleProvider = new GoogleAuthProvider();
+
+    //  using github to login website 
+
     const gitProvider = new GithubAuthProvider();
     const gitHandaler = () => {
+      setLoading(true);
         signInWithPopup(auth, gitProvider)
   .then((result) => {
     const user = result.user;
   })
+  .finally(()=>setLoading(false))
     }
+
+    // sign in using google handaler
+
     const googleHandaler = (location,history) =>{
       setLoading(true);
         signInWithPopup(auth,googleProvider)
@@ -31,28 +39,60 @@ const useFirebases = () => {
         })
         .finally (()=>setLoading(false));
   } 
-  const personalHandaler = (email,pass) => {
 
+  
+  //  using email password to to create a profile / registration form  
+
+  const personalHandaler = (email,pass,history) => {
+    setLoading(true);
     createUserWithEmailAndPassword(auth, email, pass)
     .then((result) => {
-      // Signed in 
+   
       const user = result.user;
       setUser(user);
-      console.log(user);
+      history.push('/');
       // ...
     })  
+    .finally(()=>setLoading(false));
     
   }
-  const signInPersonalData = (email,pass) => {
+
+      // onstate format using here 
+   
+  useEffect(()=>{
+    setLoading(true);
+    const  unsubscribed = onAuthStateChanged(auth, (user) => {
+        if (user) {
+  
+           setUser(user);
+        } else {
+         
+        }
+        setLoading(false);
+      })
+      return () => unsubscribed;
+    
+  },[])
+
+  //  sign in personal data 
+
+  const signInPersonalData = (email,pass,location,history) => {
+    setLoading(true)
     signInWithEmailAndPassword(auth, email, pass)
     .then((result) => {
       // Signed in 
       const user = result.user;
          setUser(user);
          console.log(user);
-      // ...
+  
+      const destination = location?.state?.from || '/';
+      history.push(destination);
     })
+    .finally(()=>setLoading(false))
   }
+
+  //  logout system 
+
   const logOut = () => {
       signOut(auth)
       .then(()=>{

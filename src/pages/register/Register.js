@@ -1,13 +1,14 @@
 import Button from '@restart/ui/esm/Button';
 import React, { useState } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link , useHistory } from 'react-router-dom';
 import useAuth from '../../hook/useAuth';
 
 const Register = () => {
     const { personalHandaler }=useAuth()
     const [email,setEmail] = useState('');
     const [pass,setPass] = useState('');
+    const history = useHistory();
     const handlePassword = e =>{
         setPass(e.target.value);
     }
@@ -16,7 +17,7 @@ const Register = () => {
     }
        const handleRegistration = e => {
         //    (email,pass);
-          personalHandaler(email,pass);
+          personalHandaler(email,pass,history);
            e.preventDefault();
        }
        
