@@ -69,6 +69,7 @@ const Login = () => {
    <div className="w-75 mx-auto d-flex justify-content-center">
    <Button onClick={ googleHandleSignIn } className="btn btn-primary mx-5  W-50">Continue with Google</Button>
      <Button onClick={ gitHandaler } className="btn btn-primary mr-1  W-50">Continue with Github</Button> 
+   
    </div>
         </div>
         </div>
