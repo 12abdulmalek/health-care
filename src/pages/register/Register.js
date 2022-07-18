@@ -57,9 +57,6 @@ const Register = () => {
                   </div>
                   <br />
                   <p className='sign-sec'>Already a user?  <Button as={Link} to="/login" type="submit" className="login-btn text-decoration-none w-5">LOGIN</Button></p>
-
-
-
                 </Col>
               </Form.Group>
             </Form>

@@ -12,7 +12,7 @@ const Services = () => {
         <div className="container overflow-hidden">
             <h1 className="my-4">our services</h1>
             { 
-            <div className="row row-cols-1 row-cols-md-2 row-cols-md-3 g-4">
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
                     {
                         service.map(service=> 
                         <Service

@@ -15,6 +15,7 @@ a{
     height: 100%;
     border-radius: 50%;
     cursor: pointer;
+    border: none;
     /* z-index: 9999999999999999999999999999999999999999; */
 }
 .displayName button{
@@ -47,3 +48,12 @@ a{
 
 
 
+@media (max-width:575px) {
+    .displayName{
+        top: 180px;
+        left: 00px !important;
+    }
+    .profile-img{
+        margin-left: 20px;
+    }
+}
